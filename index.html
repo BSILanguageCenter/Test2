@@ -1,277 +1,218 @@
 <!DOCTYPE html>
-<html lang="ru"> <!-- Устанавливаем язык страницы для правильной локализации -->
-  <head>
-    <meta charset="UTF-8"> <!-- Устанавливаем правильную кодировку UTF-8 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Для адаптивности на мобильных устройствах -->
-    <title>Форма данных транзакции</title>
-
-    <!-- Подключаем шрифты Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
-
-    <style>
-      body {
-        background-color: #f7f7f7;
-        font-family: 'Roboto', sans-serif; /* Устанавливаем шрифт Roboto */
-        margin: 0;
-        padding: 0;
-      }
-
-      .hero {
-        background-color: #333;
-        color: #fff;
-        padding: 20px 0;
-        text-align: center;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .container {
-        max-width: 480px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .input,
-      .textarea {
-        background-color: #f5f5f5;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        padding: 10px;
-        width: 100%;
-        box-sizing: border-box;
-        margin-bottom: 15px;
-      }
-
-      .input:focus,
-      .textarea:focus {
-        border-color: #4a90e2;
-        box-shadow: 0 0 5px rgba(74, 144, 226, 0.6);
-      }
-
-      .button {
-        width: 100%;
-        padding: 12px;
-        font-size: 1.1rem;
-        background-color: #4a90e2;
-        border: none;
-        color: white;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      .button:hover {
-        background-color: #357ab7;
-      }
-
-      .button.is-danger {
-        background-color: #e74c3c;
-      }
-
-      .message {
-        display: none;
-        margin: 20px;
-        font-weight: bold;
-        color: white;
-        padding: 8px;
-        background-color: #28a745;
-        border-radius: 4px;
-      }
-
-      .message.error {
-        background-color: #e74c3c;
-      }
-
-      .field {
-        margin-bottom: 15px;
-      }
-
-      label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Герой-секция с основным заголовком -->
-    <section class="hero">
-      <h1>Форма для данных транзакции</h1>
-    </section>
-
-    <!-- Форма для ввода данных -->
-    <form id="form" class="container" method="POST">
-      <!-- Поле для ввода имени пользователя -->
-      <div class="field">
-        <label for="user-name">Имя пользователя</label>
-        <input
-          id="user-name"
-          class="input"
-          type="text"
-          placeholder="Введите ваше имя"
-          name="User Name"
-        />
-      </div>
-
-      <!-- Поле для ввода адреса пользователя -->
-      <div class="field">
-        <label for="user-address">Адрес пользователя</label>
-        <input
-          id="user-address"
-          class="input"
-          type="text"
-          placeholder="Введите ваш адрес"
-          name="User Address"
-        />
-      </div>
-
-      <!-- Поле для ввода номера пользователя -->
-      <div class="field">
-        <label for="user-phone">Номер пользователя</label>
-        <input
-          id="user-phone"
-          class="input"
-          type="tel"
-          placeholder="Введите номер телефона"
-          name="User Phone"
-        />
-      </div>
-
-      <!-- Поле для ввода имени получателя -->
-      <div class="field">
-        <label for="recipient-name">Имя получателя</label>
-        <input
-          id="recipient-name"
-          class="input"
-          type="text"
-          placeholder="Введите имя получателя"
-          name="Recipient Name"
-        />
-      </div>
-
-      <!-- Поле для ввода номера получателя -->
-      <div class="field">
-        <label for="recipient-phone">Номер получателя</label>
-        <input
-          id="recipient-phone"
-          class="input"
-          type="tel"
-          placeholder="Введите номер получателя"
-          name="Recipient Phone"
-        />
-      </div>
-
-      <!-- Поле для ввода суммы для получателя -->
-      <div class="field">
-        <label for="amount">Сумма для получателя</label>
-        <input
-          id="amount"
-          class="input"
-          type="number"
-          placeholder="Введите сумму"
-          name="Amount"
-        />
-      </div>
-
-      <!-- Кнопки отправки формы и отмены -->
-      <div class="field">
-        <button class="button" type="submit" id="submit-button">
-          Отправить
-        </button>
-      </div>
-      <div class="field">
-        <button class="button is-danger" type="reset">
-          Отменить
-        </button>
-      </div>
-    </form>
-
-    <!-- Сообщение об успешной отправке или ошибке -->
-    <div id="message" class="message"></div>
-
-    <script>
-  // При загрузке страницы заполняем поля из localStorage
-  document.addEventListener("DOMContentLoaded", function () {
-    const userName = localStorage.getItem("userName");
-    const userAddress = localStorage.getItem("userAddress");
-    const userPhone = localStorage.getItem("userPhone");
-
-    if (userName) {
-      document.getElementById("user-name").value = userName;
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tranzaksiya ma'lumotlari formasi</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <style>
+    body {
+      background-color: #2c2c2c;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #f1f1f1;
     }
-    if (userAddress) {
-      document.getElementById("user-address").value = userAddress;
+    .hero {
+      background-color: #3a3a3a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 4px solid #555;
     }
-    if (userPhone) {
-      document.getElementById("user-phone").value = userPhone;
+    .hero h1 {
+      margin: 0;
+      font-size: 1.8rem;
     }
-  });
-
-  // При отправке формы сохраняем данные в localStorage
-  document.getElementById("form").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const userName = document.getElementById("user-name").value;
-    const userAddress = document.getElementById("user-address").value;
-    const userPhone = document.getElementById("user-phone").value;
-
-    // Сохраняем данные в localStorage
-    localStorage.setItem("userName", userName);
-    localStorage.setItem("userAddress", userAddress);
-    localStorage.setItem("userPhone", userPhone);
-
-    // Отправка данных на сервер
-    var formData = new FormData(this);
-    var keyValuePairs = [];
-    for (var pair of formData.entries()) {
-      keyValuePairs.push(pair[0] + "=" + encodeURIComponent(pair[1]));
+    .container {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #383838;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      border: 1px solid #444;
     }
+    .field {
+      margin-bottom: 15px;
+    }
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+      font-size: 1rem;
+      color: #bbb;
+    }
+    .input {
+      width: 100%;
+      max-width: 280px;
+      padding: 10px;
+      border: 1px solid #555;
+      border-radius: 25px;
+      font-size: 1rem;
+      background: #484848;
+      color: #fff;
+    }
+    .input:focus {
+      outline: none;
+      border-color: #b9935a;
+      box-shadow: 0 0 5px rgba(185, 147, 90, 0.6);
+    }
+    .button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      background-color: #b9935a;
+      border: none;
+      color: white;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .button:hover {
+      background-color: #987a46;
+    }
+    .fullscreen-message {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(185, 147, 90, 0.9);
+      color: white;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 9999;
+      font-size: 1.5rem;
+      padding: 20px;
+    }
+    .fullscreen-message h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .fullscreen-message p {
+      font-size: 1.2rem;
+    }
+    .line {
+      border-top: 2px solid #b9935a;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Tranzaksiya ma'lumotlari formasi</h1>
+  </div>
+  <form id="form" class="container">
+    <!-- Izarail Section -->
+    <div class="field">
+      <label for="user-name">Izarail: Foydalanuvchi ismi</label>
+      <input id="user-name" class="input" type="text" name="User Name" placeholder="Ismingiz" />
+    </div>
+    <div class="field">
+      <label for="user-address">Izarail: Foydalanuvchi manzili</label>
+      <input id="user-address" class="input" type="text" name="User Address" placeholder="Manzilingiz" />
+    </div>
+    <div class="field">
+      <label for="user-phone">Izarail: Telefon</label>
+      <input id="user-phone" class="input" type="tel" name="User Phone" placeholder="Telefon raqamingiz" />
+    </div>
 
-    var formDataString = keyValuePairs.join("&");
+    <div class="line"></div> <!-- Divider -->
 
-    fetch(
-      "https://script.google.com/macros/s/AKfycbyao9MwAgIxj9MCQ-NmlJ-1Boz5Zf4iTzVuWEXyQlqfIonWCueMDAK2NVbVsZOT4uav/exec",
-      {
-        redirect: "follow",
-        method: "POST",
-        body: formDataString,
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
+    <!-- Uzbekistan Section -->
+    <div class="field">
+      <label for="recipient-name">Uzbekistan: Qabul qiluvchining ismi</label>
+      <input id="recipient-name" class="input" type="text" name="Recipient Name" placeholder="Qabul qiluvchi ismi" />
+    </div>
+    <div class="field">
+      <label for="recipient-phone">Uzbekistan: Qabul qiluvchining telefoni</label>
+      <input id="recipient-phone" class="input" type="tel" name="Recipient Phone" placeholder="Qabul qiluvchi telefoni" />
+    </div>
+
+    <div class="field">
+      <label for="amount">Miqdor</label>
+      <input id="amount" class="input" type="number" name="Amount" placeholder="Miqdor" />
+    </div>
+
+    <button class="button" type="submit">Yuborish</button>
+  </form>
+  <div id="success-message" class="fullscreen-message">
+    <h2>Muvoffaqiyatli!</h2>
+    <p>Ma'lumotlaringiz muvaffaqiyatli yuborildi.</p>
+    <p>Bu sahifani yopishingiz mumkin.</p>
+  </div>
+
+  <script>
+    // Sahifa yuklanganda localStorage'dan ma'lumotlarni yuklash
+    document.addEventListener("DOMContentLoaded", function () {
+      const userName = localStorage.getItem("userName");
+      const userAddress = localStorage.getItem("userAddress");
+      const userPhone = localStorage.getItem("userPhone");
+
+      if (userName) {
+        document.getElementById("user-name").value = userName;
       }
-    )
-      .then(function (response) {
-        if (response) {
-          return response.json(); // Ожидаем JSON-ответ
-        } else {
-          throw new Error("Failed to submit the form.");
+      if (userAddress) {
+        document.getElementById("user-address").value = userAddress;
+      }
+      if (userPhone) {
+        document.getElementById("user-phone").value = userPhone;
+      }
+    });
+
+    // Forma yuborilganda ma'lumotlarni localStorage'ga saqlash
+    document.getElementById("form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const userName = document.getElementById("user-name").value;
+      const userAddress = document.getElementById("user-address").value;
+      const userPhone = document.getElementById("user-phone").value;
+
+      // Ma'lumotlarni localStorage'ga saqlash
+      localStorage.setItem("userName", userName);
+      localStorage.setItem("userAddress", userAddress);
+      localStorage.setItem("userPhone", userPhone);
+
+      // Yuborilgan ma'lumotlarni serverga yuborish
+      var formData = new FormData(this);
+      var keyValuePairs = [];
+      for (var pair of formData.entries()) {
+        keyValuePairs.push(pair[0] + "=" + encodeURIComponent(pair[1]));
+      }
+
+      var formDataString = keyValuePairs.join("&");
+
+      fetch(
+        "https://script.google.com/macros/s/AKfycbyao9MwAgIxj9MCQ-NmlJ-1Boz5Zf4iTzVuWEXyQlqfIonWCueMDAK2NVbVsZOT4uav/exec",
+        {
+          redirect: "follow",
+          method: "POST",
+          body: formDataString,
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
         }
-      })
-      .then(function (data) {
-        document.getElementById("message").textContent =
-          "Данные успешно отправлены!";
-        document.getElementById("message").style.backgroundColor = "#28a745"; // Зеленый
-        document.getElementById("message").style.color = "white";
-        document.getElementById("submit-button").disabled = false;
-
-        setTimeout(function () {
-          document.getElementById("message").textContent = "";
-          document.getElementById("message").style.display = "none";
-        }, 2600);
-      })
-      .catch(function (error) {
-        document.getElementById("message").textContent =
-          "Произошла ошибка при отправке формы.";
-        document.getElementById("message").style.backgroundColor = "#e74c3c"; // Красный
-        document.getElementById("message").style.color = "white";
-        document.getElementById("message").style.display = "block";
-      });
-  });
-</script>
-  </body>
+      )
+        .then(function (response) {
+          if (response) {
+            return response.json();
+          } else {
+            throw new Error("Forma yuborishda xato.");
+          }
+        })
+        .then(function (data) {
+          document.getElementById("success-message").style.display = "flex";
+          setTimeout(function () {
+            document.getElementById("success-message").style.display = "none";
+          }, 3000);
+        })
+        .catch(function (error) {
+          alert("Forma yuborishda xato yuz berdi.");
+        });
+    });
+  </script>
+</body>
 </html>
